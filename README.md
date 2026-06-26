@@ -7,3 +7,5 @@ https://github.com/Meth962/FFX2SaveEditor
 This fork makes two major changes.
 1. The .NET target is updated to work on ARM devices.
 2. Enabling automatic hash fix for PFD save data if it appears to be invalid. (My data was "invalid" despite being straight from an offical copy of the PS3 version)
+
+I have yet to use this to edit PS3 save data, and I don't yet plan to. But it does work for save file viewing.
