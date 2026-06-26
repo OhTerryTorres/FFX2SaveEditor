@@ -798,7 +798,7 @@ namespace PS3FileSystem
             if (!stream.CanRead) // Web only, we don't care about write || !stream.CanWrite)
                 throw new Exception("Unable to Access stream");
 
-            if (!ValidEntryHash(stream, entryname, false))
+            if (!ValidEntryHash(stream, entryname, true))
                 throw new Exception(
                     "Encrypted data seems to be invalid, a validated file is required for this operation");
 
@@ -944,10 +944,8 @@ namespace PS3FileSystem
             if (!File.Exists(filepath))
                 return null;
             string name = new FileInfo(filepath).Name;
-            FileStream fs = File.Open(filepath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            using FileStream fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read);
             byte[] data = Decrypt(fs, name);
-            fs.Close();
-            fs.Dispose();
             return data;
         }
 
