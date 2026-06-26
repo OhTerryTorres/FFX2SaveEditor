@@ -7,9 +7,9 @@ namespace FFX2SaveEditor
 {
     public abstract class Ffx2Save
     {
-        private MemoryStream ms;
-        private BinaryReader br;
-        private BinaryWriter bw;
+        private MemoryStream ms = null!;
+        private BinaryReader br = null!;
+        private BinaryWriter bw = null!;
 
         private readonly int storyOffset = 0x222c;
         private readonly int crcOffset = 0xd424;
@@ -529,10 +529,10 @@ namespace FFX2SaveEditor
         }
     }
 
-    public class Item
+    public class SaveItem
     {
         public byte Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public byte Quantity { get; set; }
     }
 
@@ -543,7 +543,7 @@ namespace FFX2SaveEditor
         public byte Type { get; set; }
         public ushort MaxAp { get; set; }
         public short Offset { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public ushort Ap { get; set; }
 
         public bool Mastered => Ap >= MaxAp;

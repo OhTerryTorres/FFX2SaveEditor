@@ -30,7 +30,7 @@ namespace FFX2SaveEditor
             InitializeComponent();
         }
 
-        Ffx2Save save;
+        Ffx2Save save = null!;
         MenuScreen menuScreen = MenuScreen.Main;
         PartyMember currentChar = PartyMember.Yuna;
         Dressphere currentDress = Dressphere.GunMage;
@@ -43,7 +43,7 @@ namespace FFX2SaveEditor
 
         private static object OnCoerceScaleValue(DependencyObject o, object value)
         {
-            MainWindow mainWindow = o as MainWindow;
+            MainWindow? mainWindow = o as MainWindow;
             if (mainWindow != null)
                 return mainWindow.OnCoerceScaleValue((double)value);
             else return value;
@@ -51,7 +51,7 @@ namespace FFX2SaveEditor
 
         private static void OnScaleValueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            MainWindow mainWindow = o as MainWindow;
+            MainWindow? mainWindow = o as MainWindow;
             if (mainWindow != null)
                 mainWindow.OnScaleValueChanged((double)e.OldValue, (double)e.NewValue);
         }
@@ -466,7 +466,7 @@ namespace FFX2SaveEditor
             transGilTime.BeginAnimation(TranslateTransform.XProperty, dar);
         }
 
-        private void MenuCleared(object sender, EventArgs e)
+        private void MenuCleared(object? sender, EventArgs e)
         {
             btnItems.Visibility = Visibility.Hidden;
             btnStoryCompletion.Visibility = Visibility.Hidden;
@@ -576,7 +576,7 @@ namespace FFX2SaveEditor
             transGilTime.BeginAnimation(TranslateTransform.XProperty, dar);
         }
 
-        private void MainMenuLoaded(object sender, EventArgs e)
+        private void MainMenuLoaded(object? sender, EventArgs e)
         {
             btnItems.IsEnabled = true;
             btnStoryCompletion.IsEnabled = true;
@@ -612,7 +612,7 @@ namespace FFX2SaveEditor
             ClearItemAccScreen(da, ts);
         }
 
-        private void SubMenuClear(object sender, EventArgs e)
+        private void SubMenuClear(object? sender, EventArgs e)
         {
             Console.WriteLine("SubMenuCleared()");
             switch(menuScreen)
@@ -629,7 +629,7 @@ namespace FFX2SaveEditor
             }
         }
 
-        private void ResetScrollBar(object sender, EventArgs e)
+        private void ResetScrollBar(object? sender, EventArgs e)
         {
             ScrollBar.Visibility = Visibility.Visible;
             ScrollSlider.Visibility = Visibility.Visible;
@@ -1726,11 +1726,11 @@ namespace FFX2SaveEditor
                     EditOneDressphere(grid);
                     break;
                 case MenuScreen.AbilitiesPartySelect:
-                    currentChar = (PartyMember)Enum.Parse(typeof(PartyMember), grid.Tag.ToString());
+                    currentChar = (PartyMember)Enum.Parse(typeof(PartyMember), grid.Tag?.ToString() ?? string.Empty);
                     SwitchToScreen(MenuScreen.AbilitiesDressSelect);
                     break;
                 case MenuScreen.AbilitiesDressSelect:
-                    currentDress = (Dressphere)Enum.Parse(typeof(Dressphere),grid.Tag.ToString().Replace(" ","").Replace("-",""));
+                    currentDress = (Dressphere)Enum.Parse(typeof(Dressphere), grid.Tag?.ToString().Replace(" ","").Replace("-","") ?? string.Empty);
                     SwitchToScreen(MenuScreen.Abilities);
                     break;
                 case MenuScreen.Abilities:
@@ -2047,7 +2047,7 @@ namespace FFX2SaveEditor
 
         private void trvStory_Selected(object sender, RoutedEventArgs e)
         {
-            TreeViewItem item = e.OriginalSource as TreeViewItem;
+            TreeViewItem? item = e.OriginalSource as TreeViewItem;
 
             if (item == null || e.Handled) return;
 
@@ -2212,7 +2212,7 @@ namespace FFX2SaveEditor
             ofd.Multiselect = true;
             ofd.Filter = "PC saves, Raw files (*.*)|*.*|PS3 Saves (*.PFD,*.SFO,*.*)|*.PFD;*.SFO;*.*";
             ofd.InitialDirectory = Directory.GetCurrentDirectory();
-            if (!(bool)ofd.ShowDialog())
+            if (ofd.ShowDialog() != true)
                 return;
 
             if (ofd.FileNames.Count() == 3)
@@ -2249,11 +2249,16 @@ namespace FFX2SaveEditor
             }
         }
 
-        private void textboxLevel_TextChanged(object sender, TextChangedEventArgs e)
+        private void textboxLevel_TextChanged(object sender, TextChangedEventArgs? e)
         {
-            var c = byte.Parse(((TextBox)sender).Tag.ToString());
-            var tbx = (TextBox)sender;
+            if (sender is not TextBox tbx) return;
+            if (!byte.TryParse(tbx.Tag?.ToString(), out byte c)) return;
 
+            UpdateLevelFromTextBox(tbx, c);
+        }
+
+        private void UpdateLevelFromTextBox(TextBox tbx, byte c)
+        {
             try
             {
                 var lvl = byte.Parse(tbx.Text);
@@ -2289,7 +2294,10 @@ namespace FFX2SaveEditor
                 num++;
 
             tbx.Text = num.ToString();
-            textboxLevel_TextChanged(sender, null);
+            if (sender is TextBox updateTextBox && byte.TryParse(updateTextBox.Tag?.ToString(), out byte c))
+            {
+                UpdateLevelFromTextBox(updateTextBox, c);
+            }
         }
 
         private void textbox_PreviewCanExecute(object sender, CanExecuteRoutedEventArgs e)

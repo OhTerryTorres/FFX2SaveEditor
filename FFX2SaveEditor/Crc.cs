@@ -39,7 +39,7 @@ namespace FFX2SaveEditor
             {
                 uint value = 0;
 
-                foreach (byte b in HashValue)
+                foreach (byte b in HashValue ?? Array.Empty<byte>())
                 {
                     value = value << 8 | b;
                 }
@@ -66,7 +66,7 @@ namespace FFX2SaveEditor
 
         protected override byte[] HashFinal() 
         {
-            return null;
+            return Array.Empty<byte>();
         }
 
         protected override void HashCore(byte[] Buffer, int start, int length) { }
