@@ -19,5 +19,11 @@ namespace FFX2SaveEditor.Saves
             OriginalName = Path.GetFileName(filename);
             ReadFile(new MemoryStream(File.ReadAllBytes(filename)));
         }
+
+        public PcSave(Stream stream) : base(0x16268, 0x7980, 0x7cc0, 0x7844, 0x784d, 0x222c)
+        {
+            OriginalName = "PC Save";
+            ReadFile(stream);
+        }
     }
 }

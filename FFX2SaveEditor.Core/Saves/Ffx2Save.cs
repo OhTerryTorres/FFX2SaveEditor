@@ -103,6 +103,14 @@ namespace FFX2SaveEditor
             return ms.ToArray();
         }
 
+        public virtual void ReadFile(Stream stream)
+        {
+            var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            memoryStream.Position = 0;
+            ReadFile(memoryStream);
+        }
+
         public virtual void ReadFile(MemoryStream stream)
         {
             ms = stream;
@@ -462,6 +470,14 @@ namespace FFX2SaveEditor
             StoryFlagBytes = new byte[0x4000];
             bw.BaseStream.Seek(storyOffset, SeekOrigin.Begin);
             bw.Write(StoryFlagBytes);
+        }
+
+        public virtual void SaveFile(Stream stream)
+        {
+            CalculateChecksum();
+            CalculateGameComplete();
+
+            stream.Write(ms.ToArray());
         }
 
         public virtual void SaveFile(string filename)

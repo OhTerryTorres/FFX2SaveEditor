@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFX2SaveEditor", "FFX2SaveE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFX2SaveEditor.Core", "FFX2SaveEditor.Core\FFX2SaveEditor.Core.csproj", "{6F738B14-9C5E-42BF-9C10-C5779007F4A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFX2SaveEditor.Avalonia", "FFX2SaveEditor.Avalonia\FFX2SaveEditor.Avalonia.csproj", "{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,14 @@ Global
 		{6F738B14-9C5E-42BF-9C10-C5779007F4A6}.Debug|x86.Build.0 = Debug|Any CPU
 		{6F738B14-9C5E-42BF-9C10-C5779007F4A6}.Release|x86.ActiveCfg = Release|Any CPU
 		{6F738B14-9C5E-42BF-9C10-C5779007F4A6}.Release|x86.Build.0 = Release|Any CPU
+		{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}.Debug|x86.Build.0 = Debug|Any CPU
+		{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D8E2CB8-A2A2-4EF0-86DD-3A63E8A458B5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
