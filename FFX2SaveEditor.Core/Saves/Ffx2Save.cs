@@ -517,12 +517,12 @@ namespace FFX2SaveEditor
 
         public Character(PartyMember member)
         {
-            foreach (Ability ability in Globals.Abilities.Where(a => a.Character == (byte)PartyMember.All))
+            foreach (Ability ability in GameData.Abilities.Where(a => a.Character == (byte)PartyMember.All))
             {
                 Abilities.Add(ability);
             }
 
-            foreach (Ability ability in Globals.Abilities.Where(a => a.Character == (byte)member))
+            foreach (Ability ability in GameData.Abilities.Where(a => a.Character == (byte)member))
             {
                 Abilities.Add(ability);
             }

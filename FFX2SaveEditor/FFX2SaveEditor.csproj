@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FFX2SaveEditor.Core\FFX2SaveEditor.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\**\*" />
     <None Include="App.config" />
   </ItemGroup>
