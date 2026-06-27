@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Platform;
-using FFX2SaveEditor.Saves;
+using Avalonia.Platform.Storage;
+using FFX2SaveEditor;
 using System.IO;
 
 namespace FFX2SaveEditor.Avalonia;
